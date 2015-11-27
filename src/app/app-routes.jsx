@@ -7,8 +7,11 @@ import {
 
 import Main from './components/main';
 
+import Watch from './components/watch';
+
 const AppRoutes = (
     <Route path="/" component={Main}>
+        <Route path="watch" component={Watch} />
     </Route>
     );
 

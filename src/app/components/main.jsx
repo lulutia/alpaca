@@ -1,5 +1,6 @@
 import React from 'react';
-import Router from 'react-router';
+import {Router, Route, Link, State, History} from 'react-router';
+import PageWithNav from './page-with-nav';
 import { AppBar,
       AppCanvas,
       FontIcon,
@@ -111,7 +112,7 @@ const Main = React.createClass({
          left: 45,
          top: 22,
          position: 'absolute',
-         fontSize: 26,
+         fontSize: 14,
        },
        svgLogoContainer: {
          position: 'fixed',
@@ -140,7 +141,7 @@ const Main = React.createClass({
         //.mui-font-style-headline
         fontSize: '26px',
         color: Typography.textFullWhite,
-        lineHeight: Spacing.desktopKeylineIncrement + 'px',
+        lineHeight: Spacing.desktopKeylineIncrement - 4 + 'px',
         fontWeight: Typography.fontWeightLight,
         backgroundColor: Colors.cyan500,
         paddingLeft: Spacing.desktopGutter,
@@ -149,16 +150,11 @@ const Main = React.createClass({
        },
        navtitle: {
         fontWeight: Typography.fontWeightLight,
+        fontSize:14,
         left: 45,
         position:'relative',
        },
-       menu: {
-        width:250,
-        height:"100%",
-        top:64,
-        left:0,
-        position: 'absolute',
-       },
+    
      };
    },
 
@@ -177,28 +173,30 @@ const Main = React.createClass({
       this.refs.leftNav.toggle();
     },
 
+    _handleUrlChange(e, index, item) {
+      console.log("ww");
+    this.history.pushState(null, item.route);
+  },
+
+    _getSelectedIndex(){
+
+    },
   render() {
     let styles = this._getStyles();
     let icon = (
         <iconButton iconClassName="muidocs-icon-action-stars" />
       )
-    let menuRealItems = (
-     <Menu desktop={true} style={styles.menu}>
-       <MenuItem primaryText="监控操作"  leftIcon={<ArrowDropRight />} />
-       <MenuDivider />
-       <MenuItem primaryText="线路巡逻"  leftIcon={<ArrowDropRight />} />
-       <MenuDivider />
-       <MenuItem primaryText="模式切换"  leftIcon={<ArrowDropRight />} />
-       <MenuDivider />
-       <MenuItem primaryText="视图调整" leftIcon={<ArrowDropRight />} />
-       <MenuDivider />
-       <MenuItem primaryText="工具选择"  leftIcon={<ArrowDropRight />} />
-     </Menu>
-      )
+   let menuItems = [
+         { route: '/watch', text: "监控操作", iconClassName:"icon-play"},
+         { route: '/road', text: '线路巡逻', iconClassName:"icon-road"},
+         { route: '/mode', text: '模式切换', iconClassName:"icon-cogs"},
+         { route: '/view', text: '视图调整', iconClassName:"icon-eye"},
+         { route: '/tool', text: '工具选择', iconClassName:"icon-wrench"},
+       ];
     let githubButton = (
       <IconButton
         iconStyle={styles.iconButton}
-        iconClassName="muidocs-icon-action-stars"
+        iconClassName="icon-cog"
         style={styles.github} onClick={this._navToggle}/>
     );
 
@@ -208,13 +206,13 @@ const Main = React.createClass({
         linkButton={true}
         href="/#/home">
         <img style={styles.svgLogo} src="images/material-ui-logo.svg"/>
-        <span style={styles.span}>Test Case</span>
+        <span style={styles.span}>三维全景视频融合监控系统</span>
       </EnhancedButton>) ;
 
      let header=(
       <div style={styles.navheader} onTouchTap={this._onHeaderClick}>
         <img style={styles.svgLogo} src="images/material-ui-logo.svg"/>
-        <span style={styles.navtitle}>Test Case</span>
+        <span style={styles.navtitle}>三维全景视频融合监控系统</span>
       </div>
       )
     return (
@@ -241,8 +239,10 @@ const Main = React.createClass({
              <LeftNav 
                 ref="leftNav" 
                 header={header}>
-                {menuRealItems}
+                <PageWithNav menuItems={menuItems}>  
+                </PageWithNav>
             </LeftNav>
+            {this.props.children}
             <div>
                <Paper
                  zDepth={0}
