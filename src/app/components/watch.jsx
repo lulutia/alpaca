@@ -12,6 +12,9 @@ import { AppBar,
       Tabs,
       Dialog,
       LeftNav,
+      Checkbox,
+      List,
+      ListItem,
       LinearProgress,
       Slider,
       Paper} from 'material-ui';
@@ -19,6 +22,7 @@ import { AppBar,
 const { Colors, Spacing, Typography } = Styles;
 const ThemeManager = Styles.ThemeManager;
 const LightRawTheme = Styles.LightRawTheme;
+let ArrowDropRight = require('material-ui/lib/svg-icons/navigation/arrow-back');
 
 const Watch = React.createClass({
     
@@ -40,7 +44,6 @@ const Watch = React.createClass({
             wrapper: {
                 position: "absolute",
                 width: 300,
-                height: 200,
                 right:10,
                 top:80,
             },
@@ -66,6 +69,14 @@ const Watch = React.createClass({
              iconButton: {
               color: Colors.darkWhite,
             },
+            list:{
+                maxHeight:450,
+                overflow: "scroll",
+            },
+            allButton: {
+                float: "right",
+                margin: "0px 20px 20px 0px",
+            },
         }
     },
 
@@ -89,9 +100,88 @@ const Watch = React.createClass({
         return(
                 <Paper zDepth={2} style={styles.wrapper}>
                     {header}
-                    <p>Just a test</p>
+                <List style={styles.list}>
+                   <ListItem primaryText="监控区域一" 
+                            leftIcon={<ArrowDropRight />} 
+                            initiallyOpen={false}
+                            nestedItems={[
+                                <ListItem
+                                  leftCheckbox={<Checkbox />}
+                                  primaryText="摄像头1号" />,
+                                <ListItem
+                                  leftCheckbox={<Checkbox />}
+                                  primaryText="摄像头2号"/>,
+                                <ListItem
+                                  leftCheckbox={<Checkbox />}
+                                  primaryText="摄像头3号"/>,
+                                ]}/>
+                     <ListItem primaryText="监控区域二" 
+                                leftIcon={<ArrowDropRight />} 
+                                initiallyOpen={false}
+                                nestedItems={[
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头1号" />,
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头2号"/>,
+                                    ]}/>
+                     <ListItem primaryText="监控区域三" 
+                                leftIcon={<ArrowDropRight />} 
+                                initiallyOpen={false}
+                                nestedItems={[
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头1号" />,
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头2号"/>,
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头3号"/>,
+                                    ]}
+                                />
+                     <ListItem primaryText="监控区域四"
+                                leftIcon={<ArrowDropRight />} 
+                                initiallyOpen={false}
+                                nestedItems={[
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头1号" />,
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头2号"/>,
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头3号"/>,
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头4号"/>,
+                                    ]}/>
+                     <ListItem primaryText="监控区域五"
+                                leftIcon={<ArrowDropRight />} 
+                                initiallyOpen={false}
+                                nestedItems={[
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头1号"/>,
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头2号"/>,
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头3号"/>,
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头4号"/>,
+                                    <ListItem
+                                      leftCheckbox={<Checkbox />}
+                                      primaryText="摄像头5号"/>,
+                                    ]}/>
+                    <ListItem />
+                    <RaisedButton label="全选"  secondary={true} style={styles.allButton}/>
+                    </List>
                 </Paper>
-
             )
     },
 
